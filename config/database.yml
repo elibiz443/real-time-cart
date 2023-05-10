@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: etg
+  password: immortal
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: real_time_cart_development
+
+test:
+  <<: *default
+  database: real_time_cart_test
+
+production:
+  <<: *default
+  database: real_time_cart_production
+  username: real_time_cart
+  password: <%= ENV["REAL_TIME_CART_DATABASE_PASSWORD"] %>
