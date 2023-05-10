@@ -24,3 +24,9 @@ Update routes file to:
   resources :order_items, only: [:create, :update, :destroy]
   root "products#index"
 ```
+
+Generate controllers:
+```
+rails g controller Products index && rails g controller OrderItems create update destroy && rails g controller Carts headerinfo
+```
+Update route.rb to remain as it was.
