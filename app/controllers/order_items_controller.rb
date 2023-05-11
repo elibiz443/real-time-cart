@@ -1,9 +1,27 @@
 class OrderItemsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create
     @order = current_order
     @order_item = @order.order_items.new(order_params)
-    @order.save
-    session[:order_id] = @order.id
+    if @order.save
+      session[:order_id] = @order.id
+      format.html { render :content }
+    end
+  end
+
+  def create
+    @order = current_order
+    @order_item = @order.order_items.new(order_params)
+
+    respond_to do |format|
+      if @order.save
+        session[:order_id] = @order.id
+        format.html { redirect_to "/", notice: "Item Added" }
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   def update

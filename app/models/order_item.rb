@@ -2,25 +2,25 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
-  before_save :set_unit_price
+  before_save :set_unitprice
   before_save :set_total
 
-  def unit_price
+  def unitprice
     if persisted?
-      self[:unit_price]
+      self[:unitprice]
     else
       product.price
     end
   end
 
   def total
-    unit_price * quantity
+    unitprice * quantity
   end
 
   private
 
-  def set_unit_price
-    self[:unit_price] = unit_price 
+  def set_unitprice
+    self[:unitprice] = unitprice 
   end
 
   def set_total
